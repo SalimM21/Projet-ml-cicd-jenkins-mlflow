@@ -1,1 +1,22 @@
-# Placeholder Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iris-ml-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: iris-ml-app
+  template:
+    metadata:
+      labels:
+        app: iris-ml-app
+    spec:
+      containers:
+      - name: iris-ml-app
+        image: local/iris-ml-app:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: MLFLOW_TRACKING_URI
+          value: "http://mlflow-service:5000"

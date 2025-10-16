@@ -1,1 +1,13 @@
-# Placeholder Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: iris-ml-service
+spec:
+  selector:
+    app: iris-ml-app
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 5000
+    nodePort: 30010

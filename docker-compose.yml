@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  mlflow:
+    image: python:3.10-slim
+    container_name: mlflow
+    command: bash -c "pip install mlflow sqlalchemy && mkdir -p /mlflow/mlruns && mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root /mlflow/mlruns --host 0.0.0.0 --port 5000"
+    volumes:
+      - ./mlflow/mlruns:/mlflow/mlruns
+    ports:
+      - "5000:5000"
+
+
+  iris-app:
+    build: .
+    container_name: iris-app
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
+    ports:
+      - "5001:5000"
+    depends_on:
+      - mlflow
