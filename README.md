@@ -12,11 +12,10 @@ Démontrer un flux automatisé :
 ```mermaid
 flowchart LR
     A[GitHub Repo] --> B[Jenkins Pipeline]
-    B --> C[Train Model (MLflow Tracking)]
+    B --> C["Train Model (MLflow Tracking)"]
     C --> D[Package Docker Image]
     D --> E[Deploy to Kubernetes]
-    C --> F[MLflow UI: metrics, params, artifacts]
-
+    C --> F["MLflow UI - metrics, params, artifacts"]
 
 ```
 
